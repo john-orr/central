@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
+var port = process.env.PORT || 7001;
+
 app.use(bodyParser.json());
 
 app.post('/temperatureData', function (req, res) {
@@ -9,4 +11,4 @@ app.post('/temperatureData', function (req, res) {
   res.send(req.body);
 });
 
-app.listen(7001);
+app.listen(port);
