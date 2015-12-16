@@ -1,0 +1,23 @@
+{
+  "name": "central",
+  "version": "1.0.0",
+  "description": "This application will receive from collector, save to the mongo database and push to the website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/john-orr/central.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/john-orr/central/issues"
+  },
+  "homepage": "https://github.com/john-orr/central#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3"
+  }
+}
