@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var port = process.env.PORT || 7001;
 
 app.use(bodyParser.json());
+app.use(express.static(__dirname + "/frontend"));
 
 app.post('/temperatureData', function (req, res) {
   console.log(req.body);
