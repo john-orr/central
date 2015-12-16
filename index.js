@@ -11,4 +11,5 @@ app.post('/temperatureData', function (req, res) {
   res.send(req.body);
 });
 
+console.log(`Listening on port: ${port}`);
 app.listen(port);
