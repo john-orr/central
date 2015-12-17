@@ -7,6 +7,13 @@ var port = process.env.PORT || 7001;
 
 var db = mongoose.connect("mongodb://ellis:crEmona9@ds033125.mongolab.com:33125/micro_climate_monitor");
 
+var server = app.listen(port);
+var io = require('socket.io').listen(server);
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+})
+
 db.connection.on('connected', function() {
     app.use(bodyParser.json());
     app.use(express.static(__dirname + "/frontend"));
@@ -30,16 +37,17 @@ db.connection.on('connected', function() {
                 if (err) {
                     res.send("General error!");
                 } else {
+
 				    console.log("Saved successfully:" + success)
                     res.send("Saved successfully:" + success);
                 }
             });   
         } else {
+          io.sockets.emit('hi', "hessj");
 		  res.send(`Invalid data: ${JSON.stringify(req.body)}`);
 		}
     });
     console.log(`Listening on port: ${port}`);
-    app.listen(port);
 });
 
 db.connection.on('error', function(err) {
