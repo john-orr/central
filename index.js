@@ -18,25 +18,26 @@ db.connection.on('connected', function() {
     });
     var Reading = mongoose.model('Reading', readingSchema);
     app.post('/temperatureData', function (req, res) {
-        if (req.body.name && Date.parse(req.body.timestamp) && req.body.temperature) {
-        	var tempData = new Reading();
-		  	tempData.name = req.body.name;
-            tempData.timestamp = req.body.timestamp;
-            tempData.temperature = req.body.temperature;
-            //taking the data from temperatureDate and logging it into the schema
-            console.log("Saving: " + tempData); //print which tempData is being saved
-            //final step to send to db
-            tempData.save(function(err, success) {
-                if (err) {
-                    res.send("General error!");
-                } else {
-				    console.log("Saved successfully:" + success)
-                    res.send("Saved successfully:" + success);
-                }
-            });   
-        } else {
-		  res.send(`Invalid data: ${JSON.stringify(req.body)}`);
+		console.log(`${req.body.length} records received`);
+		for(i in req.body) {
+			data = req.body[i];
+			if (data.name && Date.parse(data.timestamp) && data.temperature) {
+				var tempData = new Reading();
+				tempData.name = data.name;
+				tempData.timestamp = data.timestamp;
+				tempData.temperature = data.temperature;
+				//taking the data from temperatureDate and logging it into the schema
+				//final step to send to db
+				tempData.save(function(err, success) {
+					if (err) {
+						res.send("General error!");
+					} else {
+						console.log("Saved successfully:" + success);
+					}
+				});   
+			}
 		}
+		res.send("Thanks for the data!");
     });
     console.log(`Listening on port: ${port}`);
     app.listen(port);
