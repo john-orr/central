@@ -1,0 +1,23 @@
+{
+  "name": "frontend",
+  "description": "frontend work for the microclimate analysis project, it is a responsive website that will be displayed on mobile and desktop devices",
+  "main": "index.js",
+  "authors": [
+    "aishyaishy <aishling.costello@bearingpoint.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/john-orr/central/tree/master/frontend",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "socket.io-client": "~1.3.7"
+  }
+}
