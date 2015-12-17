@@ -19,9 +19,11 @@ db.connection.on('connected', function() {
     var Reading = mongoose.model('Reading', readingSchema);
     app.post('/temperatureData', function (req, res) {
 		console.log(`${req.body.length} records received`);
+		var validRecords = 0;
 		for(i in req.body) {
 			data = req.body[i];
 			if (data.name && Date.parse(data.timestamp) && data.temperature) {
+				validRecords++;
 				var tempData = new Reading();
 				tempData.name = data.name;
 				tempData.timestamp = data.timestamp;
@@ -37,7 +39,8 @@ db.connection.on('connected', function() {
 				});   
 			}
 		}
-		res.send("Thanks for the data!");
+		console.log(`${validRecords} valid records`)
+		res.send(`Thanks for the data! ${validRecords} were valid`);
     });
     console.log(`Listening on port: ${port}`);
     app.listen(port);
