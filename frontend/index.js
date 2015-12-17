@@ -1,5 +1,5 @@
 var socket = io.connect();
 
-socket.on('hi', function(reading){
-    console.log(reading);
+socket.on('newReading', function(readings){
+    console.log(readings);
 });
