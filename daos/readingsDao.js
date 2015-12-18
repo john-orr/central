@@ -17,6 +17,12 @@ function ReadingsDao() {
         });
     }
 
+     this.getReadings = function(callback) {
+        Reading.find({}, function(err, readings) {
+              callback(err, readings);
+        });
+     }
+
 }
 
 module.exports.ReadingsDao = ReadingsDao;
