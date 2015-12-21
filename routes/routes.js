@@ -26,8 +26,8 @@ module.exports = function(app, server) {
 		res.send(`Thanks for the data! ${validRecords} were valid`);
 	});
 	
-	app.get('/pastTemperatures', function(req, res) {
-		readingsDao.getReadings(function(err, readings) {
+	app.get('/pastTemperatures/:hours', function(req, res) {
+		readingsDao.getReadings(req.params.hours, function(err, readings) {
 			res.json(readings);
 		});
 	});
