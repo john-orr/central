@@ -17,8 +17,10 @@ function ReadingsDao() {
         });
 	}
 	
-	this.getReadings = function(callback) {
-		Reading.find({ location: /^[A-J]$/ }, function(err, readings) {
+	this.getReadings = function(hours, callback) {
+		var queryStartDate = new Date(new Date().getTime() - (hours * 60 * 60 * 1000));
+		console.log(`Getting data from ${hours} hours ago.`);
+		Reading.find({ location: /^[A-J]/, timestamp : { $gt : queryStartDate } }, function(err, readings) {
 			callback(err, readings);
 		});
 	}
