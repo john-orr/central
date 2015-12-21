@@ -1,88 +1,152 @@
 <!DOCTYPE html>
-<html>
-    
-    <head>
-        <!-- referecing the bower websocket setup folder -->
-        <script src="/bower-components/socket.io-client/socket.io.js"></script>
-        <script src="/bower-components/jquery/dist/jquery.min.js"></script>
-        <script src="index.js"></script>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Temperature Management Analysis</title>
-        <meta name="description" content="An interactive getting started guide for Brackets.">
-    </head>
-    <body>
-<object>
-        <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 487 295" style="enable-background:new 0 0 487 295;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#808080;}
-	.st1{fill:url(#SVGID_1_);}
-	.st2{fill:url(#SVGID_2_);}
-	.st3{fill:url(#SVGID_3_);}
-	.st4{fill:url(#SVGID_4_);}
-	.st5{fill:url(#SVGID_5_);}
+<meta charset="utf-8">
+<style> /* set the CSS */
+
+    body { font: 12px Arial;}
+
+    path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+    }
+
+    .axis path,
+    .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+    }
+
 </style>
-<g id="map">
-	<polygon class="st0" points="315,33 315,144 179,144 179,33 55,33 55,257 439,257 439,33 	"/>
-</g>
-<g id="point1">
-	<radialGradient id="SVGID_1_" cx="95.9083" cy="115.1113" r="73.3789" gradientUnits="userSpaceOnUse">
-		<stop  offset="7.389162e-002" style="stop-color:#F15A24"/>
-		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
-	</radialGradient>
-	<circle class="st1" cx="95.9" cy="115.1" r="73.4"/>
-</g>
-<g id="point2">
-	<radialGradient id="SVGID_2_" cx="163.1078" cy="182.3109" r="73.3789" gradientUnits="userSpaceOnUse">
-		<stop  offset="7.881773e-002" style="stop-color:#0000FF"/>
-		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
-	</radialGradient>
-	<circle class="st2" cx="163.1" cy="182.3" r="73.4"/>
-</g>
-<g id="point3">
-	<radialGradient id="SVGID_3_" cx="252.7073" cy="182.3109" r="73.3789" gradientUnits="userSpaceOnUse">
-		<stop  offset="7.389162e-002" style="stop-color:#FCEE21"/>
-		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
-	</radialGradient>
-	<circle class="st3" cx="252.7" cy="182.3" r="73.4"/>
-</g>
-<g id="point4">
-	<radialGradient id="SVGID_4_" cx="329.9482" cy="105.07" r="73.3789" gradientUnits="userSpaceOnUse">
-		<stop  offset="7.389162e-002" style="stop-color:#FF0000"/>
-		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
-	</radialGradient>
-	<circle class="st4" cx="329.9" cy="105.1" r="73.4"/>
-</g>
-<g id="point5">
-	<radialGradient id="SVGID_5_" cx="390.9685" cy="201.6212" r="73.3789" gradientUnits="userSpaceOnUse">
-		<stop  offset="7.389162e-002" style="stop-color:#FF0000"/>
-		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
-	</radialGradient>
-	<circle class="st5" cx="391" cy="201.6" r="73.4"/>
-</g>
-</svg>
+<body>
 
-      <!--  
-        <svg id="circl1Red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 194.12 145.59">
-    <defs><style>.cls-1{fill:red;}.cls-2{fill:lime;}.cls-3{fill:#ff0;}</style></defs>
+<div id="option">
+    <input name="updateButton"
+           type="button"
+           value="Update"
+           onclick="updateData()" />
+</div>
+
+<!-- load the d3.js library -->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="bower-components/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+var testData1 = [];
+
+  $.get("pastTemperatures", function(data, status){
+        testData1 = data
+    });
+
+var testData2 = [{
+"name": "dave",
+"temperature": 50,
+"timestamp": "10-May-12"
+},
+{
+"name": "dave",
+"temperature": 70,
+"timestamp": "16-May-12"
+},
+{
+"name": "dave",
+"temperature": 190,
+"timestamp": "16-May-13"
+}];
+
+// Set the dimensions of the canvas / graph
+var margin = {top: 30, right: 20, bottom: 30, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 270 - margin.top - margin.bottom;
+
+// Parse the date / time
+var parseDate = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse;
+
+// Set the ranges
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
+// Define the axes
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(5);
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+
+// Define the line
+var valueline = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.close); });
     
-    <title>test</title>
-    
-    <circle class="cls-1" cx="48.53" cy="48.53" r="48.53"/>
-    <circle class="cls-2" cx="97.06" cy="97.06" r="48.53"/>
-    <circle class="cls-3" cx="145.59" cy="48.53" r="48.53"/>
-        </svg>
-    -->
-        
-        <h1>This is the post result</h1>
-        <h2>This is a H2 header</h2>
+// Adds the svg canvas
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
 
-        
-    <P>This is where the JSON string will be displayed:<div id="testJson"></div></P>
-</object>
+// Get the data
+    testData1.forEach(function(d) {
+        d.date = parseDate(d.timestamp);
+        d.close = +d.temperature;
+    });
 
-    </body>
-</html>
+    // Scale the range of the data
+    x.domain(d3.extent(testData1, function(d) { return d.date; }));
+    y.domain([0, d3.max(testData1, function(d) { return d.close; })]);
+
+    // Add the valueline path.
+    svg.append("path")
+        .attr("class", "line")
+        .attr("d", valueline(testData1));
+
+    // Add the X Axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    // Add the Y Axis
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+
+
+// ** Update data section (Called from the onclick)
+function updateData() {
+
+    // Get the data again
+    d3.csv("data-alt.csv", function(error, data) {
+       	data.forEach(function(d) {
+	    	d.date = parseDate(d.date);
+	    	d.close = +d.close;
+	    });
+
+    	// Scale the range of the data again 
+    	x.domain(d3.extent(data, function(d) { return d.date; }));
+	    y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+    // Select the section we want to apply our changes to
+    var svg = d3.select("body").transition();
+
+    // Make the changes
+        svg.select(".line")   // change the line
+            .duration(750)
+            .attr("d", valueline(data));
+        svg.select(".x.axis") // change the x axis
+            .duration(750)
+            .call(xAxis);
+        svg.select(".y.axis") // change the y axis
+            .duration(750)
+            .call(yAxis);
+
+    });
+}
+
+</script>
+</body>
