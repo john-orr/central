@@ -14,7 +14,7 @@ var io = require('socket.io').listen(server);
                     validRecords++;
                     readingsDao.createReading(data, function(err, reading) {
                         if (err) {
-                            res.send("General error!");
+                            console.log("General error!");
                         } else {
                             io.sockets.emit('newReading', reading);
                             console.log("Saved successfully:" + reading);
