@@ -10,7 +10,7 @@ $(document).ready(function() {
         updateData(tempData);
     });
 
-    $.get("pastTemperatures", function(data){
+    $.get("pastTemperatures/24", function(data){
         tempData = data;
         makeChart(tempData);
     });
