@@ -1,18 +1,77 @@
 <!DOCTYPE html>
+    
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <html>
     
 <head>
 <title>Temperature Management Analysis</title>
-<script src="bower-components/socket.io-client/socket.io.js"></script>
+<!-- javascript -->
 <script src="bower-components/jquery/dist/jquery.min.js"></script>
+<script src="bower-components/waypoints/lib/jquery.waypoints.min.js"></script> 
+<script src="bower-components/socket.io-client/socket.io.js"></script>   
 <script src="bower-components/d3/d3.min.js"></script>
-    <script src="bower-components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower-components/bootstrap/dist/js/bootstrap.min.js"></script>   
 <script src="index.js"></script>
+<script src="main.js"></script>
 <link rel="stylesheet" type="text/css" href="index.css">
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="animate.css">
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<!-- meta data -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="A temperature management tool to settle debates and help raise awareness about energy management.">
- 
-<body id="container"></body>
+
+<header role="banner" id="fh5co-header">
+<a class="navbar-brand" href="index.html">Office Microclimate Analysis</a> 
+	</header>
     
+<body>
+
+<!-- Graph id "tempgraph" -->
+    <div id="fh5co-our-services" data-section="services">
+		<div class="container">
+			<div class="row row-bottom-padded-sm">
+				<div class="col-md-12 section-heading text-center">
+					<h2 class="to-animate">Fourth Floor Temperatures</h2>
+                    <div id="container"></div>	
+				</div>
+            </div>
+        </div>
+        
+		<div class="container">
+			<div class="row row-bottom-padded-sm">
+				<div class="col-md-12 section-heading text-center">
+					<h2 class="to-animate">Floor Plan</h2>
+                    <img src="img/map.svg">
+
+				</div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
+<!-- footer htmll -->    
+	<footer id="footer" role="contentinfo">
+		<div class="container">
+			<div class="row row-bottom-padded-sm">
+				<div class="col-md-12">
+					<p class="copyright text-center">&copy; BE an Innovator <a href="index.html">2015</a></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center"></div>
+			</div>
+		</div>
+	</footer>
+
+</body>   
 </html>

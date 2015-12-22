@@ -48,7 +48,7 @@ var dataNest = d3.nest()
                 y.domain([23, d3.max(testData1, function(d) { return d.close; })]);
 
 // Adds the svg canvas
-var svg = d3.select("body")
+var svg = d3.select("#container")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -93,7 +93,7 @@ function updateData(testData) {
 	    y.domain([23, d3.max(dataNest, function(d) { return d.close; })]);
 
     // Select the section we want to apply our changes to
-    var svg = d3.select("body").transition();
+    var svg = d3.select("#container").transition();
 
     dataNest.forEach(function(d) {
             svg.select("#" + d.key)   // change the line

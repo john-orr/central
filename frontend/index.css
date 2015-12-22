@@ -1,14 +1,61 @@
-#container {
-    background-color:ghostwhite;
+html {
+    position: relative;
+/*    background-color:ghostwhite;*/
 }
- 
-body { 
-    font: 12px "Calibri", Sans Serif;
-    align-content: center;
+
+#container {
+    margin: auto 0;
+    position: relative;
+    width: 100%;
+}
+
+svg {
+
+}
+
+/*
+#container.body {
+    marging: auto 0;
+    padding: 20% 20% 20% 20%;
+}
+*/
+
+p {
+/*    background-color: bisque;*/
+    margin: 100px, auto;
+    position: absolute;
 }
 
 g {
     background-color: aqua;
+}
+
+#A {
+    fill: none;
+    stroke: #00FFB3 ;
+    stroke-width: 1;
+    shape-rendering: crispEdges;    
+}
+
+#B{
+    fill: none;
+    stroke: #00FF55 ;
+    stroke-width: 1;
+    shape-rendering: crispEdges;  
+}
+
+#F{
+    fill: none;
+    stroke: #FF2200 ;
+    stroke-width: 1;
+    shape-rendering: crispEdges; 
+}
+
+#H{
+    fill: none;
+    stroke: #FFC000 ;
+    stroke-width: 1;
+    shape-rendering: crispEdges; 
 }
 
 path { 
@@ -31,8 +78,9 @@ path {
         width: 100%;
     }
 }
-/* rotate the chart when viewing on a screen smaller than 680px */
-@media only screen and (max-width: 680px) and (orientation: portrait) { 
+/*
+ rotate the chart when viewing on a screen smaller than 680px 
+@media only screen and (max-width: 560px) and (orientation: portrait) { 
         #container {
     -moz-transform:rotate(-90deg);
     -webkit-transform:rotate(-90deg);
@@ -40,3 +88,4 @@ path {
     transform: rotate(-90deg);
 }
     }
+*/
