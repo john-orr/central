@@ -19,7 +19,7 @@ function ReadingsDao() {
 
 	this.getReadings = function(hours, callback) {
 		var queryStartDate = new Date(new Date().getTime() - (hours * 60 * 60 * 1000));
-		Reading.find({location: /^[A-J]/, timestamp : { $gt : queryStartDate }}, null, {sort: {timestamp: 1}}, function(err, readings) {
+		Reading.find({location: /^[A-J]$/, timestamp : { $gt : queryStartDate }}, null, {sort: {timestamp: 1}}, function(err, readings) {
         	    callback(err, readings);
         	});
 	}
