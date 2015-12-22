@@ -1,16 +1,27 @@
-body { font: 12px Arial;}
+#container {
+    background-color:ghostwhite;
+}
+ 
+body { 
+    font: 12px "Calibri", Sans Serif;
+    align-content: center;
+}
+
+g {
+    background-color: aqua;
+}
 
 path { 
-    stroke: steelblue;
-    stroke-width: 2;
+    stroke: #00FFB3;
+    stroke-width: 1;
     fill: none;
 }
 
 .axis path,
 .axis line {
     fill: none;
-    stroke: grey;
-    stroke-width: 1;
+    stroke: #8D817B;
+    stroke-width: 3;
     shape-rendering: crispEdges;
 }
 
@@ -20,3 +31,12 @@ path {
         width: 100%;
     }
 }
+/* rotate the chart when viewing on a screen smaller than 680px */
+@media only screen and (max-width: 680px) and (orientation: portrait) { 
+        #container {
+    -moz-transform:rotate(-90deg);
+    -webkit-transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg);
+    transform: rotate(-90deg);
+}
+    }
