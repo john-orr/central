@@ -8,7 +8,8 @@ $.get("pastTemperatures/24", function(data, status){
 	// Set the dimensions of the canvas / graph
 	var margin = {top: 30, right: 20, bottom: 30, left: 50},
 		width = 600 - margin.left - margin.right,
-		height = 270 - margin.top - margin.bottom;
+		height = 270 - margin.top - margin.bottom,
+        percent = d3.format('%');
 	
 	// Parse the date / time
 	var parseDate = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse;

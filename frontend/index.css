@@ -10,7 +10,7 @@ html {
 }
 
 svg {
-
+    min-width: 800px;
 }
 
 /*
