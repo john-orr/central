@@ -38,7 +38,7 @@ $.get("pastTemperatures/24", function(data, status){
 	});
 	
 	x.domain(d3.extent(data, function(d) { return d.date; }));
-	y.domain([23, d3.max(data, function(d) { return d.temperature; })]);
+	y.domain([d3.min(data, function(d) { return d.temperature; }), d3.max(data, function(d) { return d.temperature; })]);
 	
 	// Adds the svg canvas
 	var svg = d3.select("body")
@@ -80,7 +80,7 @@ $.get("pastTemperatures/24", function(data, status){
 		
 		// Scale the range of the data again
 		x.domain(d3.extent(temperatureData, function(d) { return d.date; }));
-		y.domain([23, d3.max(temperatureData, function(d) { return d.temperature; })]);
+		y.domain([d3.min(data, function(d) { return d.temperature; }), d3.max(temperatureData, function(d) { return d.temperature; })]);
 		
 		// Select the section we want to apply our changes to
 		var svg = d3.select("body").transition();
