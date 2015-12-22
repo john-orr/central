@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var readingSchema = mongoose.Schema({
-        name: String,
+        location: String,
         timestamp: Date,
         temperature: Number
 });
