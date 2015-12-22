@@ -17,6 +17,8 @@ var margin = {top: 30, right: 20, bottom: 30, left: 50},
 // Parse the date / time
 var parseDate = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse;
 
+var color = d3.scale.category10();
+
 // Set the ranges
 var x = d3.time.scale().range([0, width]);
 var y = d3.scale.linear().range([height, 0]);
@@ -33,6 +35,18 @@ var valueline = d3.svg.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.close); });
 
+var dataNest = d3.nest()
+        .key(function(d) {return d.location;})
+        .entries(testData1);
+
+        testData1.forEach(function(d) {
+                d.date = parseDate(d.timestamp);
+                d.close = +d.temperature;
+            });
+
+            x.domain(d3.extent(testData1, function(d) { return d.date; }));
+                y.domain([23, d3.max(testData1, function(d) { return d.close; })]);
+
 // Adds the svg canvas
 var svg = d3.select("body")
     .append("svg")
@@ -42,20 +56,12 @@ var svg = d3.select("body")
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
 
-// Get the data
-    testData1.forEach(function(d) {
-        d.date = parseDate(d.timestamp);
-        d.close = +d.temperature;
+    dataNest.forEach(function(d) {
+         svg.append("path")
+         .attr("class", "line")
+         .attr("id", d.key)
+         .attr("d", valueline(d.values));
     });
-
-    // Scale the range of the data
-    x.domain(d3.extent(testData1, function(d) { return d.date; }));
-    y.domain([23, d3.max(testData1, function(d) { return d.close; })]);
-
-    // Add the valueline path.
-    svg.append("path")
-        .attr("class", "line")
-        .attr("d", valueline(testData1));
 
     // Add the X Axis
     svg.append("g")
@@ -69,30 +75,34 @@ var svg = d3.select("body")
         .call(yAxis);
 
 
+
+
 // ** Update data section (Called from the onclick)
 function updateData(testData) {
-
-    // Get the data again
-       	testData.forEach(function(d) {
-	    	d.date = parseDate(d.timestamp);
-	    	d.close = +d.temperature;
-	    });
 
 	    testData.sort(function(a, b) {
              return a.date - b.date;
         });
 
+        var dataNest = d3.nest()
+                .key(function(d) {return d.location;})
+                .entries(testData1);
+
     	// Scale the range of the data again
-    	x.domain(d3.extent(testData, function(d) { return d.date; }));
-	    y.domain([23, d3.max(testData, function(d) { return d.close; })]);
+    	x.domain(d3.extent(dataNest, function(d) { return d.date; }));
+	    y.domain([23, d3.max(dataNest, function(d) { return d.close; })]);
 
     // Select the section we want to apply our changes to
     var svg = d3.select("body").transition();
 
-    // Make the changes
-        svg.select(".line")   // change the line
+    dataNest.forEach(function(d) {
+            svg.select("#" + d.key)   // change the line
             .duration(750)
-            .attr("d", valueline(testData));
+            .attr("d", valueline(d.values));
+        });
+
+    // Make the changes
+
         svg.select(".x.axis") // change the x axis
             .duration(750)
             .call(xAxis);
@@ -100,11 +110,14 @@ function updateData(testData) {
             .duration(750)
             .call(yAxis);
 
+
 }
 
 var socket = io.connect();
 
 socket.on('newReading', function(reading){
+        reading.date = parseDate(reading.timestamp);
+	    reading.close = +reading.temperature;
         console.log(reading);
         testData1.push(reading);
 
