@@ -135,7 +135,7 @@ function updateData(testData) {
 
     	// Scale the range of the data again
     	x.domain(d3.extent(testData, function(d) { return d.date; }));
-	    y.domain([0, d3.max(testData, function(d) { return d.close; })]);
+	    y.domain([23, d3.max(testData, function(d) { return d.close; })]);
 
     // Select the section we want to apply our changes to
     var svg = d3.select("body").transition();
