@@ -16,7 +16,9 @@ module.exports = function(app, server) {
 					if (err) {
 						console.log("General error!");
 					} else {
-					io.sockets.emit('newReading', reading);
+						if (new RegExp("^[A-J]$").test(reading.location)) {
+							io.sockets.emit('newReading', reading);
+						}
 						console.log("Saved successfully:" + reading);
 					}
 				});
