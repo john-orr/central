@@ -39,7 +39,7 @@ $.get("pastTemperatures/24", function(data, status){
 	});
 	
 	x.domain(d3.extent(data, function(d) { return d.date; }));
-	y.domain([d3.min(data, function(d) { return d.temperature; }), d3.max(data, function(d) { return d.temperature; })]);
+	y.domain([d3.min(data, function(d) { return d.temperature-0.1; }), d3.max(data, function(d) { return d.temperature; })]);
 	
 	// Adds the svg canvas
 	var svg = d3.select("#container")
