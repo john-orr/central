@@ -8,8 +8,7 @@ $.get("pastTemperatures/24", function(data, status){
 	// Set the dimensions of the canvas / graph
 	var margin = {top: 30, right: 20, bottom: 30, left: 50},
 		width = 800 - margin.left - margin.right,
-		height = 370 - margin.top - margin.bottom,
-        percent = d3.format('%');
+		height = 370 - margin.top - margin.bottom;
 	
 	// Parse the date / time
 	var parseDate = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse;
@@ -81,7 +80,7 @@ $.get("pastTemperatures/24", function(data, status){
 		
 		// Scale the range of the data again
 		x.domain(d3.extent(temperatureData, function(d) { return d.date; }));
-		y.domain([d3.min(data, function(d) { return d.temperature; }), d3.max(temperatureData, function(d) { return d.temperature; })]);
+		y.domain([d3.min(data, function(d) { return d.temperature-0.1; }), d3.max(temperatureData, function(d) { return d.temperature; })]);
 		
 		// Select the section we want to apply our changes to
 		var svg = d3.select("#container").transition();
