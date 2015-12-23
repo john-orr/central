@@ -5,6 +5,8 @@ html {
 
 #container {
     margin: auto 0;
+    padding-right: 10px;
+/*    padding-left: -100px;*/
     position: relative;
     width: 100%;
 }
@@ -37,34 +39,78 @@ g {
 #A {
     fill: none;
     stroke: #00FFB3 ;
-    stroke-width: 1;
+    stroke-width: 2;
     shape-rendering: crispEdges;    
 }
 
 #B{
     fill: none;
     stroke: #00FF55 ;
-    stroke-width: 1;
+    stroke-width: 2;
     shape-rendering: crispEdges;  
+}
+
+#C{
+    fill: none;
+    stroke: #CD00FF ;
+    stroke-width: 2;
+    shape-rendering: crispEdges; 
+}
+
+#D{
+    fill: none;
+    stroke: #FFC0D0 ;
+    stroke-width: 2;
+    shape-rendering: crispEdges; 
+}
+
+#E{
+    fill: none;
+    stroke: #0022ff ;
+    stroke-width: 2;
+    shape-rendering: crispEdges; 
 }
 
 #F{
     fill: none;
     stroke: #FF2200 ;
-    stroke-width: 1;
+    stroke-width: 2;
+    shape-rendering: crispEdges; 
+}
+
+#G{
+    fill: none;
+    stroke: #FF007C ;
+    stroke-width: 2;
     shape-rendering: crispEdges; 
 }
 
 #H{
     fill: none;
     stroke: #FFC000 ;
-    stroke-width: 1;
+    stroke-width: 2;
     shape-rendering: crispEdges; 
 }
 
+#I{
+    fill: none;
+    stroke: #087200 ;
+    stroke-width: 2;
+    shape-rendering: crispEdges; 
+}
+
+#J{
+    fill: none;
+    stroke: #0aff00 ;
+    stroke-width: 2;
+    shape-rendering: crispEdges; 
+}
+
+
+
 path { 
     stroke: #00FFB3;
-    stroke-width: 1;
+    stroke-width: 2;
     fill: none;
 }
 
